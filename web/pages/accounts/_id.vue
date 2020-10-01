@@ -80,8 +80,8 @@
 import axios from "axios";
 import Vue from "vue";
 
-export default {
-  data() {
+export default Vue.extend({
+  data(): { account: any, show: boolean, payment: any, transactions: any, loading: boolean} {
     return {
       show: false,
       payment: {},
@@ -100,7 +100,7 @@ export default {
       .get(`http://localhost:8000/api/accounts/${this.$route.params.id}`)
       .then(function(response) {
         if (!response.data.length) {
-          window.location = "/";
+          window.location.href = "/";
         } else {
           that.account = response.data[0];
 
@@ -141,7 +141,7 @@ export default {
   },
 
   methods: {
-    onSubmit(evt) {
+    onSubmit(evt: Event) {
       var that = this;
 
       evt.preventDefault();
@@ -163,7 +163,7 @@ export default {
           .get(`http://localhost:8000/api/accounts/${this.$route.params.id}`)
           .then(function(response) {
             if (!response.data.length) {
-              window.location = "/";
+              window.location.href = "/";
             } else {
               that.account = response.data[0];
             }
@@ -196,5 +196,5 @@ export default {
       }, 200);
     }
   }
-};
+});
 </script>
