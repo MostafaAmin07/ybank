@@ -23,29 +23,9 @@ Route::prefix('api')->group(function() {
 
     Route::get('accounts/{id}/transactions', 'TransactionController@index');
 
-    Route::post('accounts/{id}/transactions', function (Request $request, $id) {
-        $to = $request->to;
-        $amount = $request->amount;
-        $details = $request->details;
+    Route::post('accounts/{id}/transactions', 'TransactionController@store');
 
-        $account = DB::table('accounts')
-            ->whereRaw("id=$id")
-            ->update(['balance' => DB::raw('balance-' . $amount)]);
-
-        $account = DB::table('accounts')
-            ->whereRaw("id=$to")
-            ->update(['balance' => DB::raw('balance+' . $amount)]);
-
-        DB::table('transactions')->insert(
-            [
-                'from' => $id,
-                'to' => $to,
-                'amount' => $amount,
-                'details' => $details
-            ]
-        );
-    });
-
+    //TODO add currency support if you have enough time
     Route::get('currencies', function () {
         $account = DB::table('currencies')
             ->get();
