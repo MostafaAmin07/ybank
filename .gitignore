@@ -1,3 +1,6 @@
 /.idea
+
 .vscode/*
+
+# Wakatime
 .wakatime*
