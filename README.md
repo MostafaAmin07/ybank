@@ -1,15 +1,40 @@
 # Test assignment
 
-For the test assignment, we have a partly finished banking application (created only for test assignment purposes), where one account can send money to another.
-This application is far from perfect, so we need you to fix and finish it by paying attention to these factors:
- * **Security** - we do not want to be hacked
- * **Best practices** - code should be clean and easy to maintain
- * **Documentation** - provide information on how to set up the project
- * **Tests** - test the parts that you feel necessary to
- * **Logic** - bank should not allow overspending your balance
+# Project setup
 
-Authentication **IS NOT** in the scope of this assignment. Getting the transactions list with the request `GET /accounts/<id>/transactions` is not a security hole.
+* **Frontend** - run the following commands
 
-Use this repository as your starting point but **DO NOT** fork it. Create a public repository on GitHub for your application source code, push it and send a link to jobs@mailerlite.com.
+    cd web
 
-Code quality in this repository **DOES NOT** represent code quality in MailerLite.
+    yarn install
+    
+    #Note if you don't have yarn installed you can use npm instead and the command would be "npm install" but, I recommend using yarn though
+    
+    yarn run dev
+
+
+* **Backend** - run the following commands
+
+  #Make sure that you have Mysql installed and running
+  
+  cd api
+  
+  composer install
+  
+  #Then copy .env.example file into the same directory and rename it to .env
+  
+  #Set the database connection credentials in the .env then run the following commands
+  
+  php artisan migrate:fresh --seed
+  
+  php artisan key:generate
+  
+  php artisan serve
+  
+  #To run unit tests run one of the following command it depends on your installation
+  
+  phpunit
+  
+  #or
+  
+  vendor/bin/phpunit
