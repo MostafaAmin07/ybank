@@ -33,8 +33,8 @@
           placeholder="Payment details"
         ></b-form-input>
       </b-form-group>
-
       <b-button type="submit" size="sm" variant="primary">Submit</b-button>
+      <label v-if="errorMsg" class="error-msg"> {{ errorMsg }} </label>
     </b-form>
   </b-card>
 </template>
@@ -46,10 +46,11 @@ import { AxiosResponse, AxiosError } from "axios";
 
 import { $axios } from '~/utils/api';
 
-//TODO Add Unit tests for this if you have enough time
+//TODO Add Unit tests for this
 @Component
 export default class PaymentFormComponent extends Vue {
   payment: any = {};
+  errorMsg: string = "";
 
   onSubmit(evt: Event) {
       let accountId = this.$route.params.id;
@@ -65,8 +66,10 @@ export default class PaymentFormComponent extends Vue {
         this.$store.dispatch('account/fetchTransactions', accountId);
         this.success();
       }).catch((error: AxiosError) => {
+        //TODO make the error msgs custom to fields and add styling
         console.log("===================================");
         console.log(error.response);
+        this.errorMsg = error.response?.data.message;
       });
 
   }
@@ -77,3 +80,10 @@ export default class PaymentFormComponent extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.error-msg {
+  font-weight: bold;
+  color: red;
+}
+</style>
