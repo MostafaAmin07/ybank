@@ -35,7 +35,7 @@ import PaymentFormComponent from "./PaymentFormComponent.vue";
 
 import { Account } from "../models/Account";
 
-//TODO Add Unit tests for this if you have enough time
+//TODO Add Unit tests for this
 const account = namespace('account');
 @Component({
   components: {

@@ -8,6 +8,8 @@ import { AccountState } from "@/models/AccountState.d.ts";
 import { Account } from "@/models/Account.d.ts";
 import { Transaction } from "@/models/Transaction.d.ts";
 
+//CHECK maybe it would be better if this module is divided into 2 modules
+//add transaction module and export all the transactions related actions mutations and getters to it
 @Module({
   stateFactory: true,
 })
