@@ -51,6 +51,8 @@ class TransactionStoreRequest extends FormRequest
             ],
             'amount' => [
                 'required',
+                'numeric',
+                'min:1',
                 function ($attribute, $value, $fail) {
                     $account = Account::findOrFail(request()->id);
                     if($value > $account->balance) {
